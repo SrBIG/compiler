@@ -1,4 +1,5 @@
 // Generated from /home/mrbig/Projects/compiler/grammar/StringParser.g4 by ANTLR 4.7.2
+import exception.StringSyntaxException;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -26,13 +27,13 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction(StringParser.FunctionContext ctx);
+	T visitFunction(StringParser.FunctionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#param_def}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParam_def(StringParser.Param_defContext ctx);
+	T visitParam_def(StringParser.Param_defContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#operators}.
 	 * @param ctx the parse tree
@@ -68,7 +69,7 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFor_instruction(StringParser.For_instructionContext ctx);
+	T visitFor_instruction(StringParser.For_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#while_instruction}.
 	 * @param ctx the parse tree

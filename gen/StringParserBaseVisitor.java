@@ -1,4 +1,5 @@
 // Generated from /home/mrbig/Projects/compiler/grammar/StringParser.g4 by ANTLR 4.7.2
+import exception.StringSyntaxException;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
@@ -30,14 +31,14 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction(StringParser.FunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunction(StringParser.FunctionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParam_def(StringParser.Param_defContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParam_def(StringParser.Param_defContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -79,7 +80,7 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFor_instruction(StringParser.For_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFor_instruction(StringParser.For_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
