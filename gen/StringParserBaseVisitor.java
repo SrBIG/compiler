@@ -17,14 +17,14 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProgram(StringParser.ProgramContext ctx) { return visitChildren(ctx); }
+	@Override public T visitProgram(StringParser.ProgramContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpression(StringParser.ExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpression(StringParser.ExpressionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -45,35 +45,35 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperators(StringParser.OperatorsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOperators(StringParser.OperatorsContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInstruction(StringParser.InstructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitInstruction(StringParser.InstructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIf_instruction(StringParser.If_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIf_instruction(StringParser.If_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitThen_block(StringParser.Then_blockContext ctx) { return visitChildren(ctx); }
+	@Override public T visitThen_block(StringParser.Then_blockContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElse_block(StringParser.Else_blockContext ctx) { return visitChildren(ctx); }
+	@Override public T visitElse_block(StringParser.Else_blockContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -115,21 +115,21 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReturn_instruction(StringParser.Return_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReturn_instruction(StringParser.Return_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperation(StringParser.OperationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOperation(StringParser.OperationContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction_call(StringParser.Function_callContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunction_call(StringParser.Function_callContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -150,49 +150,49 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitItem_index1(StringParser.Item_index1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitItem_index1(StringParser.Item_index1Context ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitItem_index2(StringParser.Item_index2Context ctx) { return visitChildren(ctx); }
+	@Override public T visitItem_index2(StringParser.Item_index2Context ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParam_list(StringParser.Param_listContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParam_list(StringParser.Param_listContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLen_function(StringParser.Len_functionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLen_function(StringParser.Len_functionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondition(StringParser.ConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCondition(StringParser.ConditionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLogical_conj(StringParser.Logical_conjContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLogical_conj(StringParser.Logical_conjContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLogical_factor(StringParser.Logical_factorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLogical_factor(StringParser.Logical_factorContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -220,7 +220,7 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperand(StringParser.OperandContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOperand(StringParser.OperandContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -241,5 +241,5 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArray(StringParser.ArrayContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArray(StringParser.ArrayContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 }

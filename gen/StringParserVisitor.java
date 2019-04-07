@@ -45,7 +45,7 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInstruction(StringParser.InstructionContext ctx);
+	T visitInstruction(StringParser.InstructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#if_instruction}.
 	 * @param ctx the parse tree
@@ -99,19 +99,19 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReturn_instruction(StringParser.Return_instructionContext ctx);
+	T visitReturn_instruction(StringParser.Return_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#operation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperation(StringParser.OperationContext ctx);
+	T visitOperation(StringParser.OperationContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#function_call}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunction_call(StringParser.Function_callContext ctx);
+	T visitFunction_call(StringParser.Function_callContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#get_item}.
 	 * @param ctx the parse tree
@@ -129,25 +129,25 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitItem_index1(StringParser.Item_index1Context ctx);
+	T visitItem_index1(StringParser.Item_index1Context ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#item_index2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitItem_index2(StringParser.Item_index2Context ctx);
+	T visitItem_index2(StringParser.Item_index2Context ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#param_list}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParam_list(StringParser.Param_listContext ctx);
+	T visitParam_list(StringParser.Param_listContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#len_function}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLen_function(StringParser.Len_functionContext ctx);
+	T visitLen_function(StringParser.Len_functionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#condition}.
 	 * @param ctx the parse tree
@@ -189,7 +189,7 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperand(StringParser.OperandContext ctx);
+	T visitOperand(StringParser.OperandContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#name}.
 	 * @param ctx the parse tree
@@ -207,5 +207,5 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArray(StringParser.ArrayContext ctx);
+	T visitArray(StringParser.ArrayContext ctx) throws StringSyntaxException;
 }
