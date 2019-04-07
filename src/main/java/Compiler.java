@@ -4,6 +4,11 @@ import java.util.*;
 
 public class Compiler extends StringParserBaseVisitor<String> {
     private List<String> functions = new ArrayList<>();
+    private Map<String, String> variables = new HashMap<>();
+
+    public Compiler(Map<String, String> variables) {
+        this.variables = variables;
+    }
 
     @Override
     public String visitProgram(StringParser.ProgramContext ctx) throws StringSyntaxException {
@@ -19,8 +24,7 @@ public class Compiler extends StringParserBaseVisitor<String> {
 
         if (!ctx.function().isEmpty()) {
             for (StringParser.FunctionContext f : ctx.function()) {
-                //Compiler functionVisitor = new Compiler(scopeVariables);
-                Compiler functionVisitor = new Compiler();
+                Compiler functionVisitor = new Compiler(variables);
                 ret.append(functionVisitor.visitFunction(f));
             }
         }
@@ -80,13 +84,12 @@ public class Compiler extends StringParserBaseVisitor<String> {
             for (int i = 0; i < ctx.type().size(); ++i) {
                 final String type_name = visitType(ctx.type().get(i));
                 final String var_name = visitName(ctx.name().get(i));
-                if (scopeVariables.findBySecond(var_name) == scopeVariables.end()) {
-                    ret.append(type_name + " " + var_name;
+                if (Objects.isNull(variables.get(var_name))) {
+                    ret.append(type_name + " " + var_name);
                     if (i < ctx.type().size() - 1) {
-                        ret.append(", ";
+                        ret.append(", ");
                     }
-                    scopeVariables.insert(std::pair < std::string, std::string > (ctx.type().at(i).
-                            getText(), var_name));
+                    variables.put(var_name, ctx.type().get(i).getText());
                 } else {
                     throw new StringSyntaxException(("Variable with name \"" + var_name + "\" is already defined\n"));
                 }
@@ -144,12 +147,12 @@ public class Compiler extends StringParserBaseVisitor<String> {
     }
 
     @Override
-    public String visitThen_block(StringParser.Then_blockContext ctx)throws StringSyntaxException {
+    public String visitThen_block(StringParser.Then_blockContext ctx) throws StringSyntaxException {
         return visitOperators(ctx.operators());
     }
 
     @Override
-    public String visitElse_block(StringParser.Else_blockContext ctx)throws StringSyntaxException {
+    public String visitElse_block(StringParser.Else_blockContext ctx) throws StringSyntaxException {
         return visitOperators(ctx.operators());
     }
 
@@ -157,19 +160,48 @@ public class Compiler extends StringParserBaseVisitor<String> {
     public String visitFor_instruction(StringParser.For_instructionContext ctx) throws StringSyntaxException {
         StringBuilder ret = new StringBuilder();
 
-        StringBuilder iterable = new StringBuilder();
+        String iterable;
         if (Objects.nonNull(ctx.operand())) {
             iterable = getIterableString(ctx.operand());
         } else {
-            iterable.append(visitOperation(ctx.operation()));
+            iterable = (visitOperation(ctx.operation()));
         }
 
-        final String name = visitName(ctx.name()));
-        ret.append("for (auto " + name + " : " + iterable + ") {\n";
-        if (scopeVariables.findBySecond(name) != scopeVariables.end()) {
+        final String name = visitName(ctx.name());
+        ret.append("for (auto " + name + " : " + iterable + ") {\n");
+        if (Objects.nonNull(variables.get(name))) {
             throw new StringSyntaxException(("Variable with name \"" + name + "\" is already defined\n"));
         }
-        scopeVariables.insert(std::pair < std::string, std::string > ("str", name));
+        variables.put(name, "str");
+        ret.append(visitOperators(ctx.operators()));
+        ret.append("}");
+
+        return ret.toString();
+    }
+
+    private String getIterableString(StringParser.OperandContext ctx) throws StringSyntaxException {
+        String iterable;
+        String varName = visitName(ctx.name());
+        if (ctx.name() != null) {
+            String type = variables.get(varName);
+            if (type.equals("list")) {
+                throw new StringSyntaxException(varName + " is not iterable\n");
+            } else {
+                iterable = varName;
+            }
+        } else if (ctx.array() != null || ctx.ident().STRING() != null) {
+            iterable = (visitOperand(ctx));
+        } else {
+            throw new StringSyntaxException(ctx.getText() + " is not iterable");
+        }
+        return iterable;
+    }
+
+    @Override
+    public String visitWhile_instruction(StringParser.While_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+
+        ret.append("while (").append(visitCondition(ctx.condition())).append(") {\n");
         ret.append(visitOperators(ctx.operators()));
         ret.append("}");
 
@@ -177,23 +209,139 @@ public class Compiler extends StringParserBaseVisitor<String> {
     }
 
     @Override
-    public String visitWhile_instruction(StringParser.While_instructionContext ctx) {
-        return super.visitWhile_instruction(ctx);
+    public String visitDefinition_instruction(StringParser.Definition_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        final String type = visitType(ctx.type());
+        final String name = visitName(ctx.name());
+        if (Objects.nonNull(variables.get(name))) {
+            throw new StringSyntaxException(("Variable with name \"" + name + "\" is already defined\n"));
+        } else {
+            ret.append(type).append(" ");
+            ret.append(name);
+            variables.put(name, ctx.type().getText());
+        }
+        if (Objects.nonNull(ctx.operation())) {
+            ret.append(" = ").append(visitOperation(ctx.operation()));
+        }
+        ret.append(";");
+        return ret.toString();
     }
 
     @Override
-    public String visitDefinition_instruction(StringParser.Definition_instructionContext ctx) {
-        return super.visitDefinition_instruction(ctx);
+    public String visitAssign_instruction(StringParser.Assign_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        if (Objects.nonNull(ctx.name())) {
+            ret.append(simpleAssignTranslation(ctx));
+        } else if (Objects.nonNull(ctx.get_item())) {
+            ret.append(insertAssignTranslation(ctx));
+        } else {
+            ret.append(replaceAssignTranslation(ctx));
+        }
+        return ret.toString();
+    }
+
+    private String replaceAssignTranslation(StringParser.Assign_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        StringParser.NameContext var_name = ctx.get_slice().operand().name();
+        String varName = visitName(var_name);
+        if (var_name != null) {    // TODO: чо за дерьмо?!!!
+            String varType = variables.get(varName);
+            if (Objects.isNull(varType)) {
+                throw new StringSyntaxException("Undefined variable ");
+            } else if (varType == "str") {
+                String index1 = visitItem_index1(ctx.get_slice().item_index1());
+                String index2 = visitItem_index2(ctx.get_slice().item_index2());
+                ret.append(varName + " = substr_to_x(" + var.second + ", " + index1 + ") + " +
+                        visitOperation(ctx.operation()) + " + substr_from_x(" + var.second + ", " + //TODO: заменить говнометоды на нормальные
+                        index2 + ");");
+            } else if (varType.equals("list")) {
+                String index1 = visitItem_index1(ctx.get_slice().item_index1());
+                String index2 = visitItem_index2(ctx.get_slice().item_index2());
+                ret += "std::replace(" + var.second + ".begin() + " + index1 + ", " + // TODO: заменить говнокод на нормальные православные методы
+                        var.second + ".begin() + " + index2 + ", " +
+                        visitOperation(ctx.operation()) + ");";
+            } else {
+                throw new StringSyntaxException(" is not iterable\n");
+            }
+        } else {
+            throw new StringSyntaxException("Could not assign to constant value\n");
+        }
+        return ret.toString();
+
+    }
+
+    private String insertAssignTranslation(StringParser.Assign_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        StringParser.NameContext var_name = ctx.get_item().operand().name();
+        if (var_name != null) {
+            String var = variables.get(visitName(var_name));
+            if (Objects.isNull(var)) {
+                throw new StringSyntaxException("Undefined variable ");
+            } else if (var.first == "str") {
+                StringParser.OperandContext operand = ctx.get_item().item_index1().operand();
+                String type;
+                if (operand.name() != null) {
+                    type = variables.get(operand.name().getText()).first;
+                }
+
+                if (type == "int" || operand.ident().NUMBER()) {
+                    String index = visitItem_index1(ctx.get_item().item_index1());
+                    ret += var.second + ".insert(" + index + ", std::string(" +
+                            visitOperation(ctx.operation()) +
+                            "));";
+                } else if (type == "str" || operand.ident().STRING()) {
+                    String substr = visitItem_index1(ctx.get_item().item_index1());
+                    String string1 = visitOperation(ctx.operation());
+                    ret += "replaceFirstOccurrence(" + var.second + ", " + substr + ", " + string1 + ");";
+                } else {
+                    throw new StringSyntaxException("Incompatible type for assign operation");
+                }
+            } else if (0 == strncmp(var.first.c_str(), "list", 4)) {
+
+                String index = visitItem_index1(ctx.get_item().item_index1());
+                ret.append(var.second + ".emplace(" + var.second + ".begin() + " + index + ", std::string(" +
+                        visitOperation(ctx.operation()) + "));");
+            } else {
+                throw new StringSyntaxException(" is not iterable\n");
+            }
+        } else {
+            throw new StringSyntaxException("Could not assign to constant value\n");
+        }
+        return ret.toString();
+
+
+    }
+
+    private String simpleAssignTranslation(StringParser.Assign_instructionContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        String name = visitName(ctx.name());
+        if (Objects.isNull(variables.get(name))) {
+            throw new StringSyntaxException(("Undefined variable \"" + name + "\"\n"));
+        }
+        ret.append(name);
+        ret.append(" = ");
+        ret.append(visitOperation(ctx.operation()) + ";");
+        return ret.toString();
+
     }
 
     @Override
-    public String visitAssign_instruction(StringParser.Assign_instructionContext ctx) {
-        return super.visitAssign_instruction(ctx);
-    }
-
-    @Override
-    public String visitPrint(StringParser.PrintContext ctx) {
-        return super.visitPrint(ctx);
+    public String visitPrint(StringParser.PrintContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        ret.append("System.out.println(\"\"");
+        for (StringParser.OperationContext param : ctx.param_list().operation()) {
+            if (Objects.nonNull(param.operand()) && Objects.nonNull(param.operand().name())) {
+                String name = visitName(param.operand().name());
+                if (Objects.isNull(variables.get(name))) {
+                    throw new StringSyntaxException(("Variable with name \"" + name + "\" does not exists\n"));
+                } else {
+                    ret.append(" + ").append(visitOperation(param));
+                }
+            }
+            ret.append(" + ").append(visitOperation(param));
+        }
+        ret.append("\"\");");
+        return ret.toString();
     }
 
     @Override
@@ -238,8 +386,21 @@ public class Compiler extends StringParserBaseVisitor<String> {
     }
 
     @Override
-    public String visitGet_slice(StringParser.Get_sliceContext ctx) {
-        return super.visitGet_slice(ctx);
+    public String visitGet_slice(StringParser.Get_sliceContext ctx) throws StringSyntaxException {
+        StringBuilder ret = new StringBuilder();
+        String operand = visitOperand(ctx.operand());
+        if (Objects.nonNull(ctx.operand().name())) {
+            final String type = variables.get(operand);
+            if (Objects.isNull(type)) {
+                throw new StringSyntaxException(("Variable with name \"" + operand + "\" does not exists\n"));
+            } else if (!type.equals("str") || !type.equals("list")) {
+                throw new StringSyntaxException(type + " type is not iterable"); //TODO: что за дерьмо?!
+            }
+        }
+        ret.append(visitOperand(ctx.operand()) + ".substr(" +
+                visitItem_index1(ctx.item_index1()) + ", " +
+                visitItem_index2(ctx.item_index2()) + ")");
+        return ret.toString();
     }
 
     @Override
@@ -356,14 +517,14 @@ public class Compiler extends StringParserBaseVisitor<String> {
     @Override
     public String visitArray(StringParser.ArrayContext ctx) throws StringSyntaxException {
         StringBuilder ret = new StringBuilder();
-        ret.append("std::list<std::string>({");
+        ret.append("std::list<std::string>({");  // TODO: Mark pidr
 
         for (int i = 0; i < ctx.operand().size(); ++i) {
             List<StringParser.OperandContext> operand = ctx.operand();
             StringParser.OperandContext element = operand.get(i);
-            if ((element.name() &&
-                    scopeVariables.findBySecond(visitName(element.name())).first != "str") ||
-                    element.ident().STRING() == null) {
+            if (Objects.nonNull(element.name()) &&
+                    !variables.get(visitName(element.name())).equals("str") ||
+                    Objects.isNull(element.ident().STRING())) {
                 throw new StringSyntaxException("Wrong value of an array");
             } else {
                 ret.append(visitOperand(element));
@@ -376,4 +537,6 @@ public class Compiler extends StringParserBaseVisitor<String> {
         ret.append("})");
         return ret.toString();
     }
+
+
 }

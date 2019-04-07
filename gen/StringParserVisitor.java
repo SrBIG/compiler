@@ -15,13 +15,13 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProgram(StringParser.ProgramContext ctx);
+	T visitProgram(StringParser.ProgramContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(StringParser.ExpressionContext ctx);
+	T visitExpression(StringParser.ExpressionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#function}.
 	 * @param ctx the parse tree
@@ -39,7 +39,7 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperators(StringParser.OperatorsContext ctx);
+	T visitOperators(StringParser.OperatorsContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#instruction}.
 	 * @param ctx the parse tree
@@ -51,19 +51,19 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIf_instruction(StringParser.If_instructionContext ctx);
+	T visitIf_instruction(StringParser.If_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#then_block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitThen_block(StringParser.Then_blockContext ctx);
+	T visitThen_block(StringParser.Then_blockContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#else_block}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitElse_block(StringParser.Else_blockContext ctx);
+	T visitElse_block(StringParser.Else_blockContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#for_instruction}.
 	 * @param ctx the parse tree
@@ -75,25 +75,25 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhile_instruction(StringParser.While_instructionContext ctx);
+	T visitWhile_instruction(StringParser.While_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#definition_instruction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDefinition_instruction(StringParser.Definition_instructionContext ctx);
+	T visitDefinition_instruction(StringParser.Definition_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#assign_instruction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssign_instruction(StringParser.Assign_instructionContext ctx);
+	T visitAssign_instruction(StringParser.Assign_instructionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#print}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPrint(StringParser.PrintContext ctx);
+	T visitPrint(StringParser.PrintContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#return_instruction}.
 	 * @param ctx the parse tree
@@ -123,7 +123,7 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGet_slice(StringParser.Get_sliceContext ctx);
+	T visitGet_slice(StringParser.Get_sliceContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#item_index1}.
 	 * @param ctx the parse tree
@@ -153,19 +153,19 @@ public interface StringParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCondition(StringParser.ConditionContext ctx);
+	T visitCondition(StringParser.ConditionContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#logical_conj}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLogical_conj(StringParser.Logical_conjContext ctx);
+	T visitLogical_conj(StringParser.Logical_conjContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#logical_factor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLogical_factor(StringParser.Logical_factorContext ctx);
+	T visitLogical_factor(StringParser.Logical_factorContext ctx) throws StringSyntaxException;
 	/**
 	 * Visit a parse tree produced by {@link StringParser#negation}.
 	 * @param ctx the parse tree

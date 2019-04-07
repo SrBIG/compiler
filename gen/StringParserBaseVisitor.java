@@ -87,28 +87,28 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWhile_instruction(StringParser.While_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWhile_instruction(StringParser.While_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefinition_instruction(StringParser.Definition_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDefinition_instruction(StringParser.Definition_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssign_instruction(StringParser.Assign_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssign_instruction(StringParser.Assign_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPrint(StringParser.PrintContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPrint(StringParser.PrintContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -143,7 +143,7 @@ public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impl
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGet_slice(StringParser.Get_sliceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGet_slice(StringParser.Get_sliceContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
