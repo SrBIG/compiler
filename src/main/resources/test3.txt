@@ -1,0 +1,18 @@
+main_program
+    begin
+
+        print('a');
+
+        char ch = 'a';
+
+
+
+        stringArray a = [ch];
+
+        for(s:a)
+        begin
+        print(s);
+        end
+
+
+        end
