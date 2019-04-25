@@ -1,0 +1,29 @@
+main_program
+    begin
+        print(1);
+        char ch = 'a';
+        int d = 2;
+        int c = call sub(d);
+        print(ch);
+        string s1 = "accc";
+        string s2 = "bbce";
+        string s3 = s1+s2;
+        string s4 = s1*s2;
+        string s5 = s1-s2;
+        string s6 = s1/s2;
+        print(s4);
+        print(s3);
+        print(s5);
+        print(s6);
+        stringArray a = [s1,s2];
+        for(s:a)
+        begin
+        print(s);
+        end
+        end
+
+sub_program int sub(int b)
+    begin
+        print(b);
+        return b;
+    end

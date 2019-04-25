@@ -7,14 +7,69 @@
     <groupId>bsuir.ai.biruchov</groupId>
     <artifactId>compiler</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.antlr/antlr4-runtime -->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4-runtime</artifactId>
+            <version>4.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>18.0</version>
+        </dependency>
+
+    </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>by.bsuir.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.antlr</groupId>
                 <artifactId>antlr4-maven-plugin</artifactId>
                 <version>4.7</version>
                 <executions>
                     <execution>
+                        <configuration>
+                            <arguments>
+                                <visitor>true</visitor>
+                            </arguments>
+                        </configuration>
                         <goals>
                             <goal>antlr4</goal>
                         </goals>
@@ -23,21 +78,50 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.1</version>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>compile</phase>
+
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.antlr</groupId>
+                                    <artifactId>antlr4-runtime</artifactId>
+                                    <type>jar</type>
+                                    <destFileName>antlr4-runtime-4.7.jar</destFileName>
+                                    <overWrite>false</overWrite>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.google.code.findbugs</groupId>
+                                    <artifactId>annotations</artifactId>
+                                    <type>jar</type>
+                                    <destFileName>annotations-2.0.1.jar</destFileName>
+                                    <overWrite>false</overWrite>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>com.google.guava</groupId>
+                                    <artifactId>guava</artifactId>
+                                    <type>jar</type>
+                                    <destFileName>guava-18.0.jar</destFileName>
+                                    <overWrite>false</overWrite>
+                                </artifactItem>
+                            </artifactItems>
+
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.antlr</groupId>
-            <artifactId>antlr4-runtime</artifactId>
-            <version>4.7</version>
-        </dependency>
-    </dependencies>
 
 </project>

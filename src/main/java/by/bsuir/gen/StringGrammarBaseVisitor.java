@@ -1,245 +1,238 @@
-// Generated from /home/mrbig/Projects/compiler/grammar/StringParser.g4 by ANTLR 4.7.2
-import exception.StringSyntaxException;
+package by.bsuir.gen;
+
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
- * This class provides an empty implementation of {@link StringParserVisitor},
+ * This class provides an empty implementation of {@link StringGrammarVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class StringParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements StringParserVisitor<T> {
+public class StringGrammarBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements StringGrammarVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitProgram(StringParser.ProgramContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitProgram(StringGrammarParser.ProgramContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpression(StringParser.ExpressionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitBlock(StringGrammarParser.BlockContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction(StringParser.FunctionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitStatement(StringGrammarParser.StatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParam_def(StringParser.Param_defContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitDigit_expression(StringGrammarParser.Digit_expressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperators(StringParser.OperatorsContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitIntialize_char(StringGrammarParser.Intialize_charContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInstruction(StringParser.InstructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitInitialize_string(StringGrammarParser.Initialize_stringContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIf_instruction(StringParser.If_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitInitialize_string_array(StringGrammarParser.Initialize_string_arrayContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitThen_block(StringParser.Then_blockContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitGlobal_assign_var(StringGrammarParser.Global_assign_varContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitElse_block(StringParser.Else_blockContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitGlobal_assign_string(StringGrammarParser.Global_assign_stringContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFor_instruction(StringParser.For_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitGlobal_assign_string_array(StringGrammarParser.Global_assign_string_arrayContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWhile_instruction(StringParser.While_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPrint(StringGrammarParser.PrintContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefinition_instruction(StringParser.Definition_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssign_var_method_invocation(StringGrammarParser.Assign_var_method_invocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssign_instruction(StringParser.Assign_instructionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssign_string(StringGrammarParser.Assign_stringContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPrint(StringParser.PrintContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssign_string_array(StringGrammarParser.Assign_string_arrayContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReturn_instruction(StringParser.Return_instructionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitAssign_var(StringGrammarParser.Assign_varContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperation(StringParser.OperationContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitOperarions_with_string_array(StringGrammarParser.Operarions_with_string_arrayContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunction_call(StringParser.Function_callContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitOperations(StringGrammarParser.OperationsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGet_item(StringParser.Get_itemContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSimple_compare(StringGrammarParser.Simple_compareContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGet_slice(StringParser.Get_sliceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMulti_compare(StringGrammarParser.Multi_compareContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitItem_index1(StringParser.Item_index1Context ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitWhile_cicle(StringGrammarParser.While_cicleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitItem_index2(StringParser.Item_index2Context ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitIf_else(StringGrammarParser.If_elseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParam_list(StringParser.Param_listContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitFor_each(StringGrammarParser.For_eachContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLen_function(StringParser.Len_functionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitType(StringGrammarParser.TypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCondition(StringParser.ConditionContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitType_1(StringGrammarParser.Type_1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLogical_conj(StringParser.Logical_conjContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitSignature(StringGrammarParser.SignatureContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLogical_factor(StringParser.Logical_factorContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitSubprogram_return(StringGrammarParser.Subprogram_returnContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNegation(StringParser.NegationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSubprogram_non_return(StringGrammarParser.Subprogram_non_returnContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitType(StringParser.TypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlock_return(StringGrammarParser.Block_returnContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitList(StringParser.ListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBlock_non_return(StringGrammarParser.Block_non_returnContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperand(StringParser.OperandContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitSignature_method_invokation(StringGrammarParser.Signature_method_invokationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitName(StringParser.NameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMethod_invokation(StringGrammarParser.Method_invokationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIdent(StringParser.IdentContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
-	@Override public T visitArray(StringParser.ArrayContext ctx) throws StringSyntaxException { return visitChildren(ctx); }
+	@Override public T visitGlobal_program(StringGrammarParser.Global_programContext ctx) { return visitChildren(ctx); }
 }
